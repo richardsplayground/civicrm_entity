@@ -1900,9 +1900,10 @@ function civicrm_entity_action_create_user($contact, $is_active, $notify = FALSE
   $config->inCiviCRM = FALSE;
 
   // If selected in action configuration, notify the newly created
-  // user & send registration link. Does not contain password in D7.
+  // user. Uses the "Admin Created" email template from the user module since
+  // we (the admin, via this module) have created their account and password.
   if ($notify) {
-    drupal_mail('user', 'register_no_approval_required', $params['mail'], NULL, array('account' => $user_object), variable_get('site_mail', 'noreply@example..com'));
+    drupal_mail('user', 'register_admin_created', $params['mail'], NULL, array('account' => $user_object), variable_get('site_mail', 'noreply@example..com'));
   }
 
   // CiviCRM doesn't do this when created off CiviCRM Form.
